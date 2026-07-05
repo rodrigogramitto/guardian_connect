@@ -14,7 +14,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
   // Tighten this to your actual frontend domain before going to production.
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://guardian-connect-beryl.vercel.app",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };

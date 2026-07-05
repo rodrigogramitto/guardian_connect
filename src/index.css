@@ -106,7 +106,7 @@ legend {
 
 .medication-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
   gap: 0.75rem;
   align-items: end;
   padding-bottom: 0.75rem;

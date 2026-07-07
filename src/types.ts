@@ -4,6 +4,11 @@ export interface Medication {
   frequency: string;
 }
 
+export interface DietaryConstraint {
+  name: string;
+  cannotEat: string[];
+}
+
 export interface RegistrationFormData {
   guardianFirstName: string;
   guardianLastName: string;
@@ -16,10 +21,15 @@ export interface RegistrationFormData {
   residenceZone: string;
   condition: string;
   medications: Medication[];
+  dietaryConstraints: DietaryConstraint[];
+  weight: number;
 }
 
-export type FormErrors = Partial<Record<Exclude<keyof RegistrationFormData, "medications">, string>> & {
+export type FormErrors = Partial<
+  Record<Exclude<keyof RegistrationFormData, "medications" | "dietaryConstraints">, string>
+> & {
   medications?: string[];
+  dietaryConstraints?: string[];
 };
 
 export interface SubmitRegistrationSuccess {

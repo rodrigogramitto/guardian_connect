@@ -6,6 +6,7 @@ import { submitRegistration } from "../lib/api";
 import { TurnstileWidget } from "./TurnstileWidget";
 import type { TurnstileWidgetHandle } from "./TurnstileWidget";
 import { MedicationRows } from "./MedicationRows";
+import { DietaryConstraintRows } from "./DietaryConstraintRows";
 
 const EMPTY_FORM: RegistrationFormData = {
   guardianFirstName: "",
@@ -19,6 +20,8 @@ const EMPTY_FORM: RegistrationFormData = {
   residenceZone: "",
   condition: "",
   medications: [],
+  dietaryConstraints: [],
+  weight: 0
 };
 
 type SubmissionState = "idle" | "submitting" | "success";
@@ -203,6 +206,19 @@ export function RegistrationForm() {
         </div>
 
         <div className="field">
+          <label htmlFor="weight">Peso (kg)</label>
+          <input
+            id="weight"
+            type="number"
+            min="0"
+            step="0.1"
+            value={form.weight || ""}
+            onChange={(e) => updateField("weight", e.target.value === "" ? 0 : Number(e.target.value))}
+          />
+          {touched && errors.weight && <span className="field-error">{errors.weight}</span>}
+        </div>
+
+        <div className="field">
           <label htmlFor="condition">Condición (opcional)</label>
           <textarea
             id="condition"
@@ -218,6 +234,15 @@ export function RegistrationForm() {
           medications={form.medications}
           errors={touched ? errors.medications : undefined}
           onChange={(medications) => updateField("medications", medications)}
+        />
+      </fieldset>
+
+      <fieldset>
+        <legend>Restricciones alimenticias (opcional)</legend>
+        <DietaryConstraintRows
+          constraints={form.dietaryConstraints}
+          errors={touched ? errors.dietaryConstraints : undefined}
+          onChange={(dietaryConstraints) => updateField("dietaryConstraints", dietaryConstraints)}
         />
       </fieldset>
 

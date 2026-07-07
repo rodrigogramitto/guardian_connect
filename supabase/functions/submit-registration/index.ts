@@ -36,6 +36,7 @@ const REQUIRED_FIELDS = [
   "birthdate",
   "phoneNumber",
   "residenceZone",
+  "weight",
 ] as const;
 
 Deno.serve(async (req: Request) => {
@@ -118,6 +119,8 @@ Deno.serve(async (req: Request) => {
     c_zone: formData.residenceZone,
     m_condition: formData.condition ?? null,
     m_medications: formData.medications ?? [],
+    c_weight: formData.weight ?? null,
+    c_dietary_constraints: formData.dietaryConstraints ?? [],
     p_client_ip: clientIp,
   });
 

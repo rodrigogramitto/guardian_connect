@@ -55,6 +55,10 @@ export function validateRegistrationForm(form: RegistrationFormData): FormErrors
 
   if (!form.residenceZone.trim()) errors.residenceZone = "Ingrese la zona de residencia.";
 
+  if (!form.weight || form.weight <= 0) {
+    errors.weight = "Ingrese un peso válido.";
+  }
+
   const medicationErrors: string[] = [];
   form.medications.forEach((medication, index) => {
     medicationErrors[index] = medication.name.trim() ? "" : "Ingrese el nombre del medicamento.";
@@ -63,10 +67,28 @@ export function validateRegistrationForm(form: RegistrationFormData): FormErrors
     errors.medications = medicationErrors;
   }
 
+  const dietaryConstraintErrors: string[] = [];
+  form.dietaryConstraints.forEach((constraint, index) => {
+    if (!constraint.name.trim()) {
+      dietaryConstraintErrors[index] = "Ingrese el nombre de la restricción.";
+    } else if (!constraint.cannotEat.some((food) => food.trim())) {
+      dietaryConstraintErrors[index] = "Ingrese al menos un alimento que no puede comer.";
+    } else {
+      dietaryConstraintErrors[index] = "";
+    }
+  });
+  if (dietaryConstraintErrors.some((message) => message)) {
+    errors.dietaryConstraints = dietaryConstraintErrors;
+  }
+
   return errors;
 }
 
 export function hasFormErrors(errors: FormErrors): boolean {
-  const { medications, ...rest } = errors;
-  return Object.values(rest).some(Boolean) || Boolean(medications?.some(Boolean));
+  const { medications, dietaryConstraints, ...rest } = errors;
+  return (
+    Object.values(rest).some(Boolean) ||
+    Boolean(medications?.some(Boolean)) ||
+    Boolean(dietaryConstraints?.some(Boolean))
+  );
 }

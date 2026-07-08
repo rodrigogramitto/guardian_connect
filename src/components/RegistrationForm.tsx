@@ -100,7 +100,7 @@ export function RegistrationForm() {
         <legend>Datos del representante</legend>
 
         <div className="field">
-          <label htmlFor="guardianFirstName">Nombre</label>
+          <label htmlFor="guardianFirstName">Nombre (opcional)</label>
           <input
             id="guardianFirstName"
             type="text"
@@ -111,7 +111,7 @@ export function RegistrationForm() {
         </div>
 
         <div className="field">
-          <label htmlFor="guardianLastName">Apellido</label>
+          <label htmlFor="guardianLastName">Apellido (opcional)</label>
           <input
             id="guardianLastName"
             type="text"
@@ -122,7 +122,7 @@ export function RegistrationForm() {
         </div>
 
         <div className="field">
-          <label htmlFor="guardianIdentityDocumentNum">Cédula de identidad</label>
+          <label htmlFor="guardianIdentityDocumentNum">Cédula de identidad (opcional)</label>
           <input
             id="guardianIdentityDocumentNum"
             type="text"
@@ -135,7 +135,7 @@ export function RegistrationForm() {
         </div>
 
         <div className="field">
-          <label htmlFor="phoneNumber">Número de teléfono</label>
+          <label htmlFor="phoneNumber">Número de teléfono (opcional)</label>
           <input
             id="phoneNumber"
             type="tel"
@@ -147,7 +147,7 @@ export function RegistrationForm() {
         </div>
 
         <div className="field">
-          <label htmlFor="residenceZone">Zona de residencia</label>
+          <label htmlFor="residenceZone">Zona de residencia (opcional)</label>
           <input
             id="residenceZone"
             type="text"
@@ -184,7 +184,7 @@ export function RegistrationForm() {
         </div>
 
         <div className="field">
-          <label htmlFor="identityDocumentNum">Cédula de identidad</label>
+          <label htmlFor="identityDocumentNum">Cédula de identidad (opcional)</label>
           <input
             id="identityDocumentNum"
             type="text"
@@ -195,7 +195,7 @@ export function RegistrationForm() {
         </div>
 
         <div className="field">
-          <label htmlFor="birthdate">Fecha de nacimiento</label>
+          <label htmlFor="birthdate">Fecha de nacimiento (opcional)</label>
           <input
             id="birthdate"
             type="date"
@@ -206,7 +206,7 @@ export function RegistrationForm() {
         </div>
 
         <div className="field">
-          <label htmlFor="weight">Peso (kg)</label>
+          <label htmlFor="weight">Peso (kg) (opcional)</label>
           <input
             id="weight"
             type="number"

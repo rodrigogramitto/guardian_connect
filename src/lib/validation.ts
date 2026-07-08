@@ -29,33 +29,25 @@ function isValidPastDate(value: string): boolean {
 export function validateRegistrationForm(form: RegistrationFormData): FormErrors {
   const errors: FormErrors = {};
 
-  if (!form.guardianFirstName.trim()) errors.guardianFirstName = "Ingrese el nombre del representante.";
-  if (!form.guardianLastName.trim()) errors.guardianLastName = "Ingrese el apellido del representante.";
-  if (!isValidIdentityDocument(form.guardianIdentityDocumentNum)) {
+  if (form.guardianIdentityDocumentNum.trim() && !isValidIdentityDocument(form.guardianIdentityDocumentNum)) {
     errors.guardianIdentityDocumentNum = "La cédula del representante debe tener entre 5 y 20 caracteres.";
   }
 
   if (!form.firstName.trim()) errors.firstName = "Ingrese el nombre del niño o niña.";
   if (!form.lastName.trim()) errors.lastName = "Ingrese el apellido del niño o niña.";
-  if (!isValidIdentityDocument(form.identityDocumentNum)) {
+  if (form.identityDocumentNum.trim() && !isValidIdentityDocument(form.identityDocumentNum)) {
     errors.identityDocumentNum = "La cédula del niño o niña debe tener entre 5 y 20 caracteres.";
   }
 
-  if (!form.birthdate) {
-    errors.birthdate = "Ingrese la fecha de nacimiento.";
-  } else if (!isValidPastDate(form.birthdate)) {
+  if (form.birthdate && !isValidPastDate(form.birthdate)) {
     errors.birthdate = "La fecha de nacimiento debe ser una fecha válida y no puede ser futura.";
   }
 
-  if (!form.phoneNumber.trim()) {
-    errors.phoneNumber = "Ingrese el número de teléfono.";
-  } else if (!isValidVenezuelanPhone(form.phoneNumber)) {
+  if (form.phoneNumber.trim() && !isValidVenezuelanPhone(form.phoneNumber)) {
     errors.phoneNumber = "Ingrese un número de teléfono venezolano válido (ej. 0412-1234567).";
   }
 
-  if (!form.residenceZone.trim()) errors.residenceZone = "Ingrese la zona de residencia.";
-
-  if (!form.weight || form.weight <= 0) {
+  if (form.weight && form.weight < 0) {
     errors.weight = "Ingrese un peso válido.";
   }
 

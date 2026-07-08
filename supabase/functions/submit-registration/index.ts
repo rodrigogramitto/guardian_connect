@@ -26,18 +26,7 @@ function jsonResponse(body: unknown, status: number) {
   });
 }
 
-const REQUIRED_FIELDS = [
-  "guardianFirstName",
-  "guardianLastName",
-  "guardianIdentityDocumentNum",
-  "firstName",
-  "lastName",
-  "identityDocumentNum",
-  "birthdate",
-  "phoneNumber",
-  "residenceZone",
-  "weight",
-] as const;
+const REQUIRED_FIELDS = ["firstName", "lastName"] as const;
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
@@ -108,18 +97,18 @@ Deno.serve(async (req: Request) => {
   );
 
   const { data, error } = await supabase.rpc("submit_registration", {
-    g_first_name: formData.guardianFirstName,
-    g_last_name: formData.guardianLastName,
-    g_identity_doc: formData.guardianIdentityDocumentNum,
+    g_first_name: formData.guardianFirstName || null,
+    g_last_name: formData.guardianLastName || null,
+    g_identity_doc: formData.guardianIdentityDocumentNum || null,
     c_first_name: formData.firstName,
     c_last_name: formData.lastName,
-    c_identity_doc: formData.identityDocumentNum,
-    c_birthdate: formData.birthdate,
-    c_phone: formData.phoneNumber,
-    c_zone: formData.residenceZone,
+    c_identity_doc: formData.identityDocumentNum || null,
+    c_birthdate: formData.birthdate || null,
+    c_phone: formData.phoneNumber || null,
+    c_zone: formData.residenceZone || null,
     m_condition: formData.condition ?? null,
     m_medications: formData.medications ?? [],
-    c_weight: formData.weight ?? null,
+    c_weight: formData.weight || null,
     c_dietary_constraints: formData.dietaryConstraints ?? [],
     p_client_ip: clientIp,
   });
